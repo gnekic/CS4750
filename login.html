@@ -19,11 +19,38 @@
     </nav>
 </head>
 
+<body>
+    <h2>Who's watching?</h2>
+    <form action="login.php" method="get">
+        <p>Username: <input type="text" name="username" id="username"/></p>
+        <p>Password: <input type="password" name="password" id="password"/></p>
+    </form>
+</body>
+
 <style>
     body {
         background-color: rgb(34,34,34);
+        text-align: center;
     }
+    h2 {
+        color: white;
+        font-family: Avenir;
+    }
+    p {
+        font-family: Avenir;
+        color: rgb(252,93,92);
+    }
+    #username:focus {
+        color: black;
+        font-family: Avenir;
+    }
+    #password:focus {
+        color: black;
+        font-family: Avenir;
+    }
+
     .navbar{
+        font-family: Avenir;
         border-radius: 0;
     }
 </style>
