@@ -1,20 +1,18 @@
 <?PHP
-    $host="stardock.cs.virginia.edu";
-    $username="cs4750s17ek4wy";
-    $password="spring2017";
-    $db_name="cs4750s17ek4wy";
-    $tbl_name="Users";
-    
-    // Connect to server
-    mysql_connect("$host", "$username", "$password")or die("cannot connect");
-    mysql_select_db("$db_name")or die("cannot select DB");
-    
-    $myusername=$_POST['myusername'];
-    $mypassword=md5($_POST['mypassword']);
-    
-    // Selecting all users from table
-    $sql="SELECT * FROM $tbl_name WHERE username='$myusername' and password='$mypassword'";
-    $result=mysql_query($sql);
-    
-    // need to check if given name and password match one in table
+    class DbUtil {
+        public static $host="stardock.cs.virginia.edu";
+        public static $username="cs4750s17ek4wy";
+        public static $password="spring2017";
+        public static $schema = "cs4750jmi8fs";
+        
+        public static function loginConnection(){
+            $db = new mysqli(DbUtil::$host, DbUtil::$loginUser, DbUtil::$loginPass, DbUtil::$schema);
+            if($db->connect_errno){
+                echo("Could not connect to db");
+                $db->close();
+                exit();
+            }
+            return $db;
+        }
+    }
 ?>
