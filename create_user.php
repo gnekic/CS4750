@@ -27,7 +27,8 @@
     else
     {
         echo "Welcome $username!";
-        header("Location:index.html")
+        $_SESSION["username"] = $username;
+        header("Location:profile.html")
     }
     mysqli_close($con);
 ?>
