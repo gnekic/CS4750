@@ -1,32 +1,27 @@
-// like an insert?
 <?php
-    require("connect_to_db.php")
-    $db = DbUtil::loginConnection();
-    $con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
+    include("connect_to_db.php");
+	$db = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);	
+    if ($db->connect_error):
+       die ("Could not connect to db " . $db->connect_error);
+    endif;
     
-    if (mysqli_connect_errno()) {
-        echo("Can't connect to MySQL Server. Error code: " .
-             mysqli_connect_error());
-        return null;
-    }
-    
-    $username = $_POST['username']
-    $first_name = $_POST['first_name']
-    $last_name = $_POST['last_name']
-    $email = $_POST['email']
-    $password = $_POST['password']
-    $fav_genre = $_POST['fav_genre']
+    $username = $_POST['username'];
+    $first_name = $_POST['first_name'];
+    $last_name = $_POST['last_name'];
+    $email = $_POST['email'];
+    $password = md5($_POST['password']); //Encrypt Password
+    $fav_genre = $_POST['fav_genre'];
     
     $sql = "INSERT INTO Users Values
         ('$username', '$first_name', '$last_name', '$email', '$password', '#fav_genre')";
     
-    if (!mysqli_query($con,$sql))
+    if (!mysqli_query($db,$sql))
     {
-        die('Error: ' . mysqli_error($con));
+        die('Error: ' . mysqli_error($db));
     }
     else
     {
         echo "Welcome $username!";
     }
-    mysqli_close($con);
+    mysqli_close($db);
 ?>

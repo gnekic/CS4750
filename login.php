@@ -1,6 +1,10 @@
 <?php
-    require("connect_to_db.php");
-    $db = DbUtil::loginConnection();
+   	include("connect_to_db.php");
+	$db = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);	
+    if ($db->connect_error):
+       die ("Could not connect to db " . $db->connect_error);
+    endif;
+	
     session_start();
     $stmt = $db->stmt_init();
     $name = $_GET["username"];
