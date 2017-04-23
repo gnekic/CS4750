@@ -11,7 +11,6 @@
     $email = $_POST['email'];
     $password = md5($_POST['password']); //Encrypt Password
     $fav_genre = $_POST['fav_genre'];
-    
     $sql = "INSERT INTO Users Values
         ('$username', '$first_name', '$last_name', '$email', '$password', '#fav_genre')";
     
@@ -22,6 +21,8 @@
     else
     {
         echo "Welcome $username!";
+        $_SESSION["username"] = $username;
+        header("Location:profile.html")
     }
     mysqli_close($db);
 ?>

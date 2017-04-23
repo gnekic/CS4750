@@ -1,5 +1,10 @@
+<?php
+    session_start();
+?>
+<!DOCTYPE html>
+<html lang="en">
 
- <head>
+<head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
  </head>
     <nav class="navbar navbar" style="color:black">
@@ -12,17 +17,24 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html" style="color:white">NeXtflix</a>
+                <a class="navbar-brand" href="profile.html" style="color:white">NeXtflix</a>
             </div>
 
             <div class="collapse navbar-collapse" id="topNavBar">
                 <ul class="nav navbar-nav navbar-right" style="color:white">
                     <li class="">
                         <a href="" style="color:white">
-                            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>&nbsp; Create Account
+                            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>&nbsp; What to Watch!
                         </a>
                     </li>
                 </ul>
+                <ul class="nav navbar-nav navbar-right">
+					<li class="">
+						<a href="logout.php" style="color:white">
+							<span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp; Logout
+						</a>
+					</li>
+				</ul>
             </div>
         </div>
     </nav>
@@ -35,6 +47,12 @@
             font-family: Avenir;
             border-radius: 0;
         }
+     h1{
+         font-family: Avenir;
+         color: white;
+         text-align: center;
+
+     }
      h2 {
          font-family: Avenir;
          color: white;
@@ -50,15 +68,7 @@
      }
  </style>
 <body>
-    <h2>Who's watching?</h2>
-    <form action="login.php" method="post">
-        <p>Username: <input type="text" name="username" id="username" style="color:black"/></p>
-        <p>Password: <input type="password" name="password" id="password" style="color:black"/></p>
-        <input type="Submit" style="margin-left:5%">
-    </form>
+    <h1>Welcome: $_SESSION["username"]</h1>
 </body>
 
-
-
-
-
+</html>
