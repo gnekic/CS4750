@@ -1,5 +1,14 @@
+<?php
+    session_start();
+     ################### Check Login Status ###################
+	 if(!$_SESSION["login"]){
+		header("Location: index.html");
+	  } 
+	 else{
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
  </head>
@@ -13,7 +22,24 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html" style="color:white">NeXtflix</a>
+                <a class="navbar-brand" href="profile.html" style="color:white">NeXtflix</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="topNavBar">
+                <ul class="nav navbar-nav navbar-right" style="color:white">
+                    <li class="">
+                        <a href="" style="color:white">
+                            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>&nbsp; What to Watch!
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+					<li class="">
+						<a href="logout.php" style="color:white">
+							<span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp; Logout
+						</a>
+					</li>
+				</ul>
             </div>
         </div>
     </nav>
@@ -26,12 +52,17 @@
             font-family: Avenir;
             border-radius: 0;
         }
+     h1{
+         font-family: Avenir;
+         color: white;
+         text-align: center;
+
+     }
      h2 {
          font-family: Avenir;
          color: white;
          margin-left: 5%;
      }
-
      p{
          font-family: Avenir;
          color: white;
@@ -39,32 +70,12 @@
      }
      input{
          font-family: Avenir;
-         color: black;
-     }
-     select{
-         font-family: Avenir;
-         color: black;
      }
  </style>
 <body>
-    <h2>Welcome to NeXtflix!</h2>
-    <form action="create_user.php" method="post">
-        <p>First Name: <input type="text" name="first_name" required id="first_name"/></p>
-        <p>Last Name: <input type="text" name="last_name" required id="last_name"/></p>
-        <p>Email: <input type="text" name="email" required id="email"/></p>
-        <p>Username: <input type="text" name="username" required id="username"/></p>
-        <p>Password: <input type="password" name="password" required id="password"/>
-        <p>Your Favorite Genre:
-            <select name="fav_genre">
-                <option value="Comedy">Comedy</option>
-                <option value="Horror">Horror</option>
-                <option value="Action">Action</option>
-                <option value="Drama">Drama</option>
-                <option value="Sci-Fi/Fantasy">Sci-Fi/Fantasy</option>
-            </select>
-        </p>
-        <input type="Submit" style="margin-left:5%">
-    </form>
-
+    <h1>Welcome: <?php echo($_SESSION["username"]); 
+	 }?>
+	 </h1>
 </body>
+
 </html>

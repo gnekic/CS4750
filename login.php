@@ -6,23 +6,25 @@
     endif;
 	
     session_start();
-    $stmt = $db->stmt_init();
-    $name = $_GET["username"];
-    $pword = md5($_GET["password"]);
+    $name = $_POST["username"];
+    $pword = md5($_POST["password"]);
     $found = 0;
     $login = false;
-    if ($stmt->prepare("select * from Users where username = ? and password = ?")) {
-        mysqli_stmt_bind_param($stmt, "ss", $name, $pword);
-        mysqli_stmt_execute($stmt);
-        mysqli_stmt_bind_result($stmt, $usr, $pass);
-        if (mysqli_stmt_fetch($stmt)) {
+    if ($stmt = $db->prepare("select username, password from Users where username = ? and password = ?")) {
+        $stmt->bind_param('ss', $name, $pword);
+        $stmt->execute();
+        $stmt->bind_result($name, $pass);
+        if ($stmt->fetch()) {
             $found = 5;
             $_SESSION["login"] = true;
             $_SESSION["username"] = $name;
-            header(Location:"profile.html");
+            header("Location: profile.php");
         }
-        $stmt->close();
-    }
-    echo $found;
+		else{
+			//$_SESSION["wrong"] = 1;
+			header("Location: login.html");
+		}
+	}
+	$stmt->close();
     $db->close();
 ?>
