@@ -20,14 +20,20 @@
         $stmt->bind_result($name, $pass);
         if ($stmt->fetch()) {
             $_SESSION["login"] = true;
-            $_SESSION["username"] = $name;
-            header('Location: ./profile.html');
-            exit();
+            $_SESSION["username"] = $name;?>
+			<script type = "text/javascript">
+				document.cookie = "loginwrong=right";
+				window.location.replace("profile.php");
+			</script>
+            <?php
         }
-		else{
-			//$_SESSION["wrong"] = 1;
-			header('Location: ./login.html');
-            exit();
+		//Incorrect:
+		else{ ?>
+			<script type = "text/javascript">
+				document.cookie = "loginwrong=wrong";
+				window.location.replace("login.html");
+			</script>
+			<?php 
 		}
 	}
 	$stmt->close();
