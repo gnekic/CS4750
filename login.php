@@ -1,28 +1,33 @@
 <?php
-   	include("connect_to_db.php");
-	$db = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);	
-    if ($db->connect_error):
-       die ("Could not connect to db " . $db->connect_error);
-    endif;
-	
+    ob_start();
     session_start();
+   	include("./connect_to_db.php");
+    $db = DbUtil::loginConnection();
+    
+    // Check connection
+    if (mysqli_connect_errno()) {
+        echo "Failed to connect to MySQL: " . mysqli_connect_error();
+    }
+
     $name = $_POST["username"];
     $pword = md5($_POST["password"]);
-    $found = 0;
     $login = false;
+    
+    $stmt = $db->stmt_init();
     if ($stmt = $db->prepare("select username, password from Users where username = ? and password = ?")) {
         $stmt->bind_param('ss', $name, $pword);
         $stmt->execute();
         $stmt->bind_result($name, $pass);
         if ($stmt->fetch()) {
-            $found = 5;
             $_SESSION["login"] = true;
             $_SESSION["username"] = $name;
-            header("Location: profile.php");
+            header('Location: ./profile.html');
+            exit();
         }
 		else{
 			//$_SESSION["wrong"] = 1;
-			header("Location: login.html");
+			header('Location: ./login.html');
+            exit();
 		}
 	}
 	$stmt->close();

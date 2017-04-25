@@ -2,7 +2,7 @@
     session_start();
      ################### Check Login Status ###################
 	 if(!$_SESSION["login"]){
-		header("Location: index.html");
+		header('Location: index.html');
 	  } 
 	 else{
 ?>
