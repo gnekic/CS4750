@@ -2,3 +2,4 @@ $ cat .gitignore
 
 # Can ignore specific files
 /hash_passwords.php
+/connect_to_db.php
