@@ -17,12 +17,20 @@
         if ($stmt->fetch()) {
             $found = 5;
             $_SESSION["login"] = true;
-            $_SESSION["username"] = $name;
-            header("Location: profile.php");
+            $_SESSION["username"] = $name;?>
+			<script type = "text/javascript">
+				document.cookie = "loginwrong=right";
+				window.location.replace("profile.php");
+			</script>
+            <?php
         }
-		else{
-			//$_SESSION["wrong"] = 1;
-			header("Location: login.html");
+		//Incorrect:
+		else{ ?>
+			<script type = "text/javascript">
+				document.cookie = "loginwrong=wrong";
+				window.location.replace("login.html");
+			</script>
+			<?php 
 		}
 	}
 	$stmt->close();
