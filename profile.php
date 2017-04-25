@@ -73,9 +73,34 @@
      }
  </style>
 <body>
-    <h1>Welcome: <?php echo($_SESSION["username"]); 
-	 }?>
+    <h1>Welcome: <?php echo($_SESSION["username"]);
+        }?>
 	 </h1>
+    <h2>
+    <?php //Find current user's favorite genre
+        include_once("./library.php");
+        $con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
+        
+        if (mysqli_connect_errno()) {
+            echo("Can't connect to MySQL Server.");
+            return null;
+        }
+        
+        $username = $_SESSION["username"];
+        $getGenre = "SELECT fav_genre FROM Users WHERE username = '$username'";
+        $fav_genre = mysqli_query($con, $getGenre);
+        while($genres = mysqli_fetch_array($fav_genre)) {
+            $genre = $genres['fav_genre'];
+        }
+
+            //Join TVShows & Movies, select Titles of those that are from the same preferred genre of the logged in user
+            $sql="SELECT Title, Genre FROM Movies WHERE Genre='$genre' UNION ALL SELECT Title, Genre FROM TVShows WHERE Genre='$genre'";
+            $result = mysqli_query($con,$sql);
+        
+            while($row = mysqli_fetch_array($result)) {
+                echo($row['Title']."<br>");
+            }
+        ?></h2>
 </body>
 
 </html>

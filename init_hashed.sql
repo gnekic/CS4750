@@ -23,9 +23,10 @@ VALUES
 	
 DROP TABLE IF EXISTS Movies;
 create table Movies ( 
-	title varchar(50), 
+	Title varchar(50),
 	movie_id int primary key,
-	rating int, genre varchar(50), 
+	Rating int,
+    Genre varchar(50),
 	director varchar(30), 
 	release_date date
 	);

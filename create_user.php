@@ -43,6 +43,7 @@
     {
         $_SESSION["username"] = $username;
 		$_SESSION["login"] = true;
+        $_SESSION["fav_genre"] = $genre;
 		?>
 		<script type = "text/javascript">
 				document.cookie = "usernametaken=valid";
