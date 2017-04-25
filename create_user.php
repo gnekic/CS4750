@@ -22,10 +22,13 @@
 	$sql="SELECT username FROM Users";
 	$result = $db->query($sql);
 	while($row = $result->fetch_assoc()){
+		echo($row["username"]);
+		echo("<br>");
 		if($row["username"] == $username){ ?>
 			<script type = "text/javascript">
 				document.cookie = "usernametaken=taken";
 				window.location.replace("create_account.html");
+				
 			</script>
 			<?php
 		}
@@ -33,14 +36,10 @@
 	
     $sql = "INSERT INTO Users Values
         ('$username', '$first_name', '$last_name', '$email', '$password', '$fav_genre')";
-    //if error:
-    if (!mysqli_query($db,$sql))
-    {
-        die('Error: ' . mysqli_error($db));
-    }
+	$result = $db->query($sql);
+
 	//successful creation of account:
-    else
-    {
+
         $_SESSION["username"] = $username;
 		$_SESSION["login"] = true;
         $_SESSION["fav_genre"] = $genre;
@@ -50,7 +49,6 @@
 				window.location.replace("profile.php");
 			</script>
 		<?php
-    }
         
     mysqli_close($con);
 ?>
