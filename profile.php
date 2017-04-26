@@ -63,6 +63,11 @@
          color: white;
          margin-left: 5%;
      }
+	 h3 {
+         font-family: Avenir;
+         color: white;
+         margin-left: 5%;
+     }
      p{
          font-family: Avenir;
          color: white;
@@ -76,6 +81,17 @@
     <h1>Welcome: <?php echo($_SESSION["username"]);
         }?>
 	 </h1>
+	 <h2> Popular Now </h2>
+	 <h3> TV Shows: </h3>
+		<table id="popularShows" border = "1" class="table-responsive" align = center>
+			<tr id="showRow">
+			</tr>
+		</table>
+		<h3> Movies: </h3>
+		<table id="popularMovies" border = "1" class="table-responsive" align = center>
+			<tr id="movieRow">
+			</tr>
+		</table>
     <h2>
     <?php //Find current user's favorite genre
         include_once("./library.php");
@@ -86,21 +102,49 @@
             return null;
         }
         
-        $username = $_SESSION["username"];
+		$username = $_SESSION["username"];
         $getGenre = "SELECT fav_genre FROM Users WHERE username = '$username'";
         $fav_genre = mysqli_query($con, $getGenre);
         while($genres = mysqli_fetch_array($fav_genre)) {
             $genre = $genres['fav_genre'];
         }
-
-            //Join TVShows & Movies, select Titles of those that are from the same preferred genre of the logged in user
-            $sql="SELECT Title, Genre FROM Movies WHERE Genre='$genre' UNION ALL SELECT Title, Genre FROM TVShows WHERE Genre='$genre'";
-            $result = mysqli_query($con,$sql);
-        
+/*           
+		   //Join TVShows & Movies, select Titles of those that are from the same preferred genre of the logged in user
+            $query1="SELECT Title, Genre FROM Movies WHERE Genre='$genre' UNION ALL SELECT Title, Genre FROM TVShows WHERE Genre='$genre'";
+            
+        $result = mysqli_query($con, $query1);
             while($row = mysqli_fetch_array($result)) {
                 echo($row['Title']."<br>");
-            }
+            }*/
         ?></h2>
+		
+	<script type = "text/javascript">
+		//Populate tvshow table
+		var tvrow = document.getElementById("showRow");
+		var i = 0;
+		<?php 
+		$query1="SELECT Title FROM TVShows WHERE TVShows.Rating > 4";
+		$result = mysqli_query($con, $query1);
+		
+		while($tvrow = mysqli_fetch_array($result)) { ?>
+			var x = tvrow.insertCell(i);
+			x.innerHTML = "<h4><?php echo($tvrow['Title']); ?></h4>";			
+			i++;
+           <?php } ?>;
+		   
+		//Populate movie table   
+		var mrow = document.getElementById("movieRow");
+		var j = 0;
+		<?php 
+		$query2="SELECT Title FROM Movies WHERE Movies.Rating = 5";
+		$result2 = mysqli_query($con, $query2);
+		
+		while($mrow = mysqli_fetch_array($result2)) { ?>
+			var x = mrow.insertCell(j);
+			x.innerHTML = "<h6><?php echo($mrow['Title']); ?></h6>";			
+			j++;
+           <?php } ?>;
+	</script>
 </body>
 
 </html>
