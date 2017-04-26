@@ -83,15 +83,19 @@
 	 </h1>
 	 <h2> Popular Now </h2>
 	 <h3> TV Shows: </h3>
+        <div style="overflow-x:auto;">
 		<table id="popularShows" border = "1" class="table-responsive" align = center>
 			<tr id="showRow">
 			</tr>
 		</table>
+        </div>
 		<h3> Movies: </h3>
+        <div style="overflow-x:auto;">
 		<table id="popularMovies" border = "1" class="table-responsive" align = center>
 			<tr id="movieRow">
 			</tr>
 		</table>
+        </div>
     <h2>
     <?php //Find current user's favorite genre
         include_once("./library.php");
