@@ -132,7 +132,8 @@
 		
 		while($tvrow = mysqli_fetch_array($result)) { ?>
 			var x = tvrow.insertCell(i);
-			x.innerHTML = "<h4><?php echo($tvrow['Title']); ?></h4>";			
+            <?php $title = $tvrow['Title']; ?>
+			x.innerHTML ="<a href='index.html'><img src='./images/<?php echo($title); ?>.jpg' style='width:180px;height:152px;'></a>";
 			i++;
            <?php } ?>;
 		   
@@ -145,7 +146,8 @@
 		
 		while($mrow = mysqli_fetch_array($result2)) { ?>
 			var x = mrow.insertCell(j);
-			x.innerHTML = "<h6><?php echo($mrow['Title']); ?></h6>";			
+            <?php $title = $mrow['Title']; ?>
+			x.innerHTML ="<a href='index.html'><img src='./images/<?php echo($title); ?>.jpg' style='width:180px;height:152px;'></a>";
 			j++;
            <?php } ?>;
 	</script>
